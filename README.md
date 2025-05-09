@@ -1,5 +1,14 @@
 # Campaign Management System
 
+## Overview
+A sophisticated campaign management system that leverages AI to provide intelligent campaign suggestions and management capabilities. The system integrates with MongoDB for data persistence and uses advanced AI services for campaign optimization.
+
+## Key Features
+- **AI-Powered Campaign Suggestions**: Integration with Cerebras API for intelligent campaign recommendations
+- **Robust Authentication**: Secure token-based authentication system
+- **Asynchronous Architecture**: Efficient handling of database operations and API calls
+- **MongoDB Integration**: Scalable data storage with proper async/await patterns
+
 ## Getting Started
 
 ### 1. Create and Activate Virtual Environment
@@ -29,15 +38,6 @@ CEREBRAS_API_KEY=your_api_key
 ```bash
 python app.py
 ```
-
-## Overview
-A sophisticated campaign management system that leverages AI to provide intelligent campaign suggestions and management capabilities. The system integrates with MongoDB for data persistence and uses advanced AI services for campaign optimization.
-
-## Key Features
-- **AI-Powered Campaign Suggestions**: Integration with Cerebras API for intelligent campaign recommendations
-- **Robust Authentication**: Secure token-based authentication system
-- **Asynchronous Architecture**: Efficient handling of database operations and API calls
-- **MongoDB Integration**: Scalable data storage with proper async/await patterns
 
 ## Project Structure
 ```
