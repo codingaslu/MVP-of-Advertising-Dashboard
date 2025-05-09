@@ -373,10 +373,10 @@ async def edit_campaign_submit(
         banner_id = campaign["banner_id"]
         
         # Process new banner if provided (either file or URL)
-        if banner or banner_url:
+        if banner and banner.filename or banner_url:
             if banner_id:
                 await models.delete_image(banner_id)
-            banner_input = banner if banner else banner_url
+            banner_input = banner if banner and banner.filename else banner_url
             file_data, filename, content_type = await process_banner(banner_input)
             banner_id = await models.save_image_to_gridfs(io.BytesIO(file_data), filename)
         
@@ -386,7 +386,8 @@ async def edit_campaign_submit(
             "interests": interests
         }
         
-        await db.campaigns.update_one(
+        # Update campaign in database
+        result = await db.campaigns.update_one(
             {"_id": campaign["_id"]},
             {"$set": {
                 "name": name,
@@ -397,13 +398,25 @@ async def edit_campaign_submit(
             }}
         )
         
-        return RedirectResponse(url="/campaigns", status_code=status.HTTP_303_SEE_OTHER)
-    except HTTPException:
-        return RedirectResponse(url="/campaigns", status_code=status.HTTP_303_SEE_OTHER)
+        if result.modified_count == 0:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Campaign not updated"
+            )
+        
+        return {"status": "success", "message": "Campaign updated successfully"}
+        
+    except HTTPException as he:
+        raise he
     except ValueError as e:
-        return RedirectResponse(
-            url=f"/edit-campaign/{campaign_id}?error={str(e)}", 
-            status_code=status.HTTP_303_SEE_OTHER
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e)
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error updating campaign: {str(e)}"
         )
 
 @router.get("/delete-campaign/{campaign_id}")
