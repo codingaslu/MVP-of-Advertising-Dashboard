@@ -1,6 +1,5 @@
 # Campaign Management System
 
-
 ## Overview
 A sophisticated campaign management system that leverages AI to provide intelligent campaign suggestions and management capabilities. The system integrates with MongoDB for data persistence and uses advanced AI services for campaign optimization.
 
@@ -10,37 +9,25 @@ A sophisticated campaign management system that leverages AI to provide intellig
 - **Asynchronous Architecture**: Efficient handling of database operations and API calls
 - **MongoDB Integration**: Scalable data storage with proper async/await patterns
 
+## Development Tools Used
 
-## Getting Started
+### Claude (Anthropic's AI)
+Claude was instrumental in designing and structuring the project:
+- **Project Architecture**: Designed the initial project structure and file organization
+- **Code Organization**: Suggested the modular approach with separate routes and services
+- **Best Practices**: Provided guidance on FastAPI and MongoDB async patterns
+- **Documentation**: Helped create comprehensive documentation and README
+- **Problem Solving**: Assisted in debugging and error resolution
+- **Code Review**: Suggested improvements and optimizations for existing code
 
-### 1. Create and Activate Virtual Environment
-```bash
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment (Windows)
-venv\Scripts\activate
-
-# Activate virtual environment (macOS/Linux)
-source venv/bin/activate
-```
-
-### 2. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Configure Environment Variables
-```bash
-MONGODB_URI=your_mongodb_uri
-CEREBRAS_API_KEY=your_api_key
-```
-
-### 4. Run the Application
-```bash
-python app.py
-```
-
+### Cursor IDE
+Cursor enhanced the development process through:
+- **Code Generation**: Rapid implementation of routes and features
+- **Real-time Assistance**: Instant code suggestions and completions
+- **Error Detection**: Early identification of potential issues
+- **Refactoring**: Smart code reorganization and cleanup
+- **Integration Help**: Assistance with MongoDB and FastAPI integration
+- **Testing**: Help with writing and implementing tests
 
 ## Project Structure
 ```
@@ -110,6 +97,35 @@ graph TD
   - Features: Text generation, creative content
 - **Frontend**: Jinja2 Templates with static assets, using HTML, CSS, and JavaScript
 
+## Getting Started
+
+### 1. Create and Activate Virtual Environment
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment (Windows)
+venv\Scripts\activate
+
+# Activate virtual environment (macOS/Linux)
+source venv/bin/activate
+```
+
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Configure Environment Variables
+```bash
+MONGODB_URI=your_mongodb_uri
+CEREBRAS_API_KEY=your_api_key
+```
+
+### 4. Run the Application
+```bash
+python app.py
+```
 
 ## Best Practices Implemented
 - Proper async/await patterns
@@ -119,8 +135,3 @@ graph TD
 - Modular code organization
 - Clean separation of concerns
 
-## Future Improvements
-- Enhanced AI suggestion algorithms
-- Real-time campaign analytics
-- Advanced user authentication features
-- Performance optimization for large-scale campaigns 
