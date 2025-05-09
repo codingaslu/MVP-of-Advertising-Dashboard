@@ -1,0 +1,2 @@
+# This file ensures the static directory is included in version control
+# The static/uploads directory will be created at runtime 

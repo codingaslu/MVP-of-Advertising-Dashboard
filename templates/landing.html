@@ -1,0 +1,509 @@
+{% extends "base.html" %}
+
+{% block title %}Ad Campaign Dashboard - Optimize Your Advertising{% endblock %}
+
+{% block head %}
+<style>
+    /* Additional animations and effects */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+    
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    .fade-in-up {
+        animation: fadeInUp 1s ease forwards;
+    }
+    
+    .delay-1 {
+        animation-delay: 0.2s;
+    }
+    
+    .delay-2 {
+        animation-delay: 0.4s;
+    }
+    
+    .delay-3 {
+        animation-delay: 0.6s;
+    }
+    
+    /* Enhanced hero section */
+    .hero-section {
+        position: relative;
+        overflow: hidden;
+        padding: 7rem 0;
+        background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    }
+    
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.15;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .hero-btn {
+        padding: 15px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        display: inline-block;
+        text-decoration: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .hero-btn-primary {
+        background-color: white;
+        color: #0d6efd;
+    }
+    
+    .hero-btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        color: #0a58ca;
+    }
+    
+    .hero-btn-secondary {
+        background-color: transparent;
+        color: white;
+        border: 2px solid white;
+        margin-left: 15px;
+    }
+    
+    .hero-btn-secondary:hover {
+        background-color: white;
+        color: #0d6efd;
+        transform: translateY(-3px);
+    }
+    
+    /* Enhanced feature cards */
+    .feature-card {
+        padding: 2.5rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        height: 100%;
+        border: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #0d6efd, #0dcaf0);
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: rgba(13, 110, 253, 0.1);
+        color: #0d6efd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        margin: 0 auto 1.5rem;
+    }
+    
+    /* AI demo section */
+    .ai-demo-section {
+        background-color: #f8f9fa;
+        padding: 5rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .ai-demo-container {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .demo-card {
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .demo-header {
+        background-color: #0d6efd;
+        color: white;
+        padding: 1.5rem;
+    }
+    
+    .demo-content {
+        padding: 2rem;
+    }
+    
+    .step-item {
+        display: flex;
+        margin-bottom: 1.5rem;
+    }
+    
+    .step-number {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #0d6efd;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+</style>
+{% endblock %}
+
+{% block full_width_content %}
+<!-- Navigation Bar for Landing Page -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0d6efd; position: sticky; top: 0; z-index: 1000;">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-chart-line me-2"></i>Ad Campaign Dashboard
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarLanding">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarLanding">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">
+                        <i class="fas fa-sign-in-alt me-1"></i> Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signup">
+                        <i class="fas fa-user-plus me-1"></i> Sign Up
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Enhanced Hero Section -->
+<section class="hero-section">
+    <div class="container hero-content">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-white">
+                <h1 class="display-4 fw-bold mb-4 fade-in-up">AI-Powered Advertising Made Simple</h1>
+                <p class="lead mb-5 fade-in-up delay-1">Create high-performing campaigns in minutes with our intelligent platform that combines AI suggestions with powerful analytics.</p>
+                <div class="fade-in-up delay-2">
+                    <a href="/signup" class="hero-btn hero-btn-primary">Get Started Free</a>
+                    <a href="#features" class="hero-btn hero-btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block text-center">
+                <img src="https://cdn-icons-png.flaticon.com/512/1055/1055645.png" alt="Dashboard" class="img-fluid animate-float" style="max-width: 60%; filter: brightness(0) invert(1);">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Brand Logos Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-4">
+            <p class="text-muted">TRUSTED BY BUSINESSES WORLDWIDE</p>
+        </div>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-2 col-4 text-center mb-4">
+                <img src="https://cdn-icons-png.flaticon.com/512/5969/5969064.png" alt="Company Logo" class="img-fluid" style="height: 40px; opacity: 0.7;">
+            </div>
+            <div class="col-md-2 col-4 text-center mb-4">
+                <img src="https://cdn-icons-png.flaticon.com/512/5969/5969118.png" alt="Company Logo" class="img-fluid" style="height: 40px; opacity: 0.7;">
+            </div>
+            <div class="col-md-2 col-4 text-center mb-4">
+                <img src="https://cdn-icons-png.flaticon.com/512/5969/5969167.png" alt="Company Logo" class="img-fluid" style="height: 40px; opacity: 0.7;">
+            </div>
+            <div class="col-md-2 col-4 text-center mb-4">
+                <img src="https://cdn-icons-png.flaticon.com/512/5969/5969141.png" alt="Company Logo" class="img-fluid" style="height: 40px; opacity: 0.7;">
+            </div>
+            <div class="col-md-2 col-4 text-center mb-4">
+                <img src="https://cdn-icons-png.flaticon.com/512/5969/5969096.png" alt="Company Logo" class="img-fluid" style="height: 40px; opacity: 0.7;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section" id="features">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="text-primary fw-bold mb-3">WHY CHOOSE OUR PLATFORM?</h6>
+            <h2 class="display-5 fw-bold">Everything You Need for Successful Campaigns</h2>
+            <p class="lead mx-auto" style="max-width: 700px;">Our platform combines powerful AI with intuitive tools to help you create, manage, and optimize your advertising campaigns.</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="h4 mb-3">AI-Powered Suggestions</h3>
+                    <p>Our artificial intelligence generates tailored campaign ideas based on your business type, saving you time and improving performance.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="h4 mb-3">Real-time Analytics</h3>
+                    <p>Track impressions, clicks, and conversions as they happen with comprehensive dashboards and interactive charts.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="h4 mb-3">Precision Targeting</h3>
+                    <p>Reach exactly the right audience with advanced targeting options based on demographics, interests, and behavior.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI Demo Section -->
+<section class="ai-demo-section">
+    <div class="container ai-demo-container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h6 class="text-primary fw-bold mb-3">AI-POWERED INNOVATION</h6>
+                <h2 class="display-5 fw-bold mb-4">See How Our AI Creates Winning Campaigns</h2>
+                <p class="lead mb-4">Our AI technology analyzes thousands of successful campaigns to provide you with tailored suggestions for your specific business.</p>
+                
+                <div class="demo-steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h5>Enter Your Business Type</h5>
+                            <p>Simply tell us what kind of business you're running to get tailored recommendations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h5>Get AI-Generated Suggestions</h5>
+                            <p>Our AI creates campaign titles, descriptions, and ad copy specifically for your business.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h5>Apply and Customize</h5>
+                            <p>Apply the suggestions with one click and customize as needed for your perfect campaign.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="/signup" class="btn btn-primary btn-lg mt-4">Try It Now</a>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="demo-card">
+                    <div class="demo-header">
+                        <h4 class="mb-0">AI Campaign Suggestion</h4>
+                    </div>
+                    <div class="demo-content">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Business Type</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="Local Coffee Shop" readonly>
+                                <button class="btn btn-primary" disabled>Generate</button>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Campaign Title</label>
+                            <input type="text" class="form-control" value="Artisan Coffee Experience" readonly>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Target Audience</label>
+                            <input type="text" class="form-control" value="Age: 25-45, Location: Urban centers, Interests: Food, Health, Art" readonly>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Ad Copy</label>
+                            <textarea class="form-control" rows="3" readonly>Discover the perfect blend of flavor and atmosphere at our artisan coffee shop. Ethically sourced beans, expert baristas, and a cozy environment await you.</textarea>
+                        </div>
+                        
+                        <button class="btn btn-success w-100" disabled>Apply Suggestion</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="text-primary fw-bold mb-3">TESTIMONIALS</h6>
+            <h2 class="display-5 fw-bold">What Our Clients Say</h2>
+            <p class="lead">Trusted by businesses worldwide</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        "This platform revolutionized our digital marketing strategy. We saw a 45% increase in conversions within the first month of using the AI suggestions."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Marketing Director, TechCorp</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        "The AI recommendations were spot on. Our ad spend is now much more efficient, and we're reaching exactly the right customers for our business."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-info">
+                            <h4>David Chen</h4>
+                            <p>CEO, Startup Innovations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        "As a small business owner, I needed something easy to use but powerful. This platform delivers exactly that and has helped us compete with much larger competitors."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-info">
+                            <h4>Michelle Rodriguez</h4>
+                            <p>Owner, Boutique Collective</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="display-4 fw-bold mb-4">Ready to Transform Your Advertising?</h2>
+                <p class="lead mb-5">Join thousands of businesses that have already improved their advertising performance with our AI-powered platform.</p>
+                <a href="/signup" class="btn btn-light btn-lg">Create Free Account</a>
+                <a href="/login" class="btn btn-outline-light btn-lg ms-3">Sign In</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="bg-dark text-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <h5 class="fw-bold mb-3">Ad Campaign Dashboard</h5>
+                <p>The most powerful AI-driven advertising platform for businesses of all sizes.</p>
+            </div>
+            <div class="col-md-2 mb-4 mb-md-0">
+                <h5 class="fw-bold mb-3">Product</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#features" class="text-light text-decoration-none">Features</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Pricing</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">API</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2 mb-4 mb-md-0">
+                <h5 class="fw-bold mb-3">Company</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-light text-decoration-none">About</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Careers</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5 class="fw-bold mb-3">Stay Updated</h5>
+                <form>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email">
+                        <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                </form>
+                <div class="mt-3">
+                    <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-light me-3"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="text-light"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="mt-4 mb-3 bg-light">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="mb-0">&copy; 2024 Ad Campaign Dashboard. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <a href="#" class="text-light text-decoration-none me-3">Privacy Policy</a>
+                <a href="#" class="text-light text-decoration-none">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% endblock %} 

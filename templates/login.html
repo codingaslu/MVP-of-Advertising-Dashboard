@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Ad Campaign Dashboard{% endblock %}
+
+{% block full_width_content %}
+<!-- Navigation Bar for Login Page -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0d6efd;">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-chart-line me-2"></i>Ad Campaign Dashboard
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAuth">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarAuth">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/login">
+                        <i class="fas fa-sign-in-alt me-1"></i> Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signup">
+                        <i class="fas fa-user-plus me-1"></i> Sign Up
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h3>Ad Campaign Dashboard</h3>
+            <p>Login to your account</p>
+        </div>
+        <div class="auth-body">
+            {% if request.query_params.get("error") %}
+            <div class="alert alert-danger">
+                {{ request.query_params.get("error").replace("+", " ") }}
+            </div>
+            {% endif %}
+            
+            {% if request.query_params.get("success") %}
+            <div class="alert alert-success">
+                {{ request.query_params.get("success").replace("+", " ") }}
+            </div>
+            {% endif %}
+
+            <form action="/token" method="post" class="auth-form">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="/signup">Sign up here</a></p>
+                <p class="mt-1"><a href="/">Learn more about our platform</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

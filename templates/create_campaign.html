@@ -1,0 +1,530 @@
+{% extends "base.html" %}
+
+{% block title %}Create Campaign - Ad Campaign Dashboard{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<style>
+    .form-select {
+        position: relative !important;
+        z-index: 1050 !important;
+        height: 38px !important;  /* Match input height */
+        padding: 0.375rem 0.75rem !important;  /* Match input padding */
+        font-size: 1rem !important;  /* Match input font size */
+        line-height: 1.5 !important;  /* Match input line height */
+    }
+    select.form-select {
+        -webkit-appearance: menulist !important;
+        -moz-appearance: menulist !important;
+        appearance: menulist !important;
+    }
+    .form-select option {
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #333;
+    }
+    .form-select option:hover,
+    .form-select option:focus,
+    .form-select option:active,
+    .form-select option:checked {
+        background-color: #0d6efd !important;
+        color: white !important;
+    }
+    .form-select:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        border-color: #86b7fe;
+    }
+    /* Match input group styling */
+    .form-select {
+        border: 1px solid #ced4da;
+        border-radius: 0.375rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    /* Hide second dropdown */
+    select.form-select[size],
+    select.form-select[multiple] {
+        background-image: none;
+    }
+    /* Custom scrollbar */
+    .form-select {
+        scrollbar-width: thin;
+        scrollbar-color: #0d6efd #f8f9fa;
+    }
+    .form-select::-webkit-scrollbar {
+        width: 8px;
+    }
+    .form-select::-webkit-scrollbar-track {
+        background: #f8f9fa;
+        border-radius: 4px;
+    }
+    .form-select::-webkit-scrollbar-thumb {
+        background-color: #0d6efd;
+        border-radius: 4px;
+        border: 2px solid #f8f9fa;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Create New Campaign</h4>
+            </div>
+            <div class="card-body">
+                {% if prefill %}
+                <div class="alert alert-success">
+                    <h5>AI-Suggested Campaign</h5>
+                    <p>{{ prefill.description }}</p>
+                    <div class="card bg-light mb-3">
+                        <div class="card-body">
+                            <h6>Suggested Ad Copy:</h6>
+                            <p>{{ prefill.ad_text }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <form action="/create-campaign" method="post" enctype="multipart/form-data" class="form-container">
+                    <!-- AI Suggestion Feature -->
+                    <div class="mb-4">
+                        <div class="card border-primary">
+                            <div class="card-header bg-primary bg-opacity-10 d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0"><i class="bi bi-magic"></i> Campaign Ideas</h5>
+                                <div class="input-group" style="max-width: 400px;">
+                                    <input type="text" class="form-control" id="business-type" placeholder="Enter your business type (optional)">
+                                    <button class="btn btn-outline-primary" type="button" id="suggestion-btn" onclick="getSuggestion()">
+                                        <i class="bi bi-lightbulb"></i> Get Ideas
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body" id="suggestion-container" style="display: none;">
+                                <div id="suggestion-content">
+                                    <div class="text-center py-4">
+                                        <p class="text-muted">Click "Get Ideas" to generate campaign suggestions for your business</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Campaign Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ prefill.name if prefill else '' }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="ad_copy" class="form-label">Ad Copy</label>
+                        <textarea class="form-control" id="ad_copy" name="ad_copy" rows="3" placeholder="Enter compelling text for your advertisement">{{ prefill.ad_text if prefill else '' }}</textarea>
+                        <div class="form-text">This text will appear in your advertisement to attract customers.</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Audience Targeting</h5>
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Age Range</label>
+                                        <div class="row g-3">
+                                            <div class="col">
+                                                <div class="input-group">
+                                                    <span class="input-group-text">From</span>
+                                                    <input type="number" class="form-control" name="age_min" min="13" max="100" value="{{ prefill.age_min if prefill else 18 }}" required>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="input-group">
+                                                    <span class="input-group-text">To</span>
+                                                    <input type="number" class="form-control" name="age_max" min="13" max="100" value="{{ prefill.age_max if prefill else 65 }}" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <label for="location" class="form-label">Location</label>
+                                        <select class="form-select" id="location" name="location" required>
+                                            <option value="">Select a location</option>
+                                            {% for location in locations %}
+                                            <option value="{{ location }}" {% if prefill and prefill.location == location %}selected{% endif %}>{{ location }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <label class="form-label">Interests</label>
+                                        <div class="row">
+                                            {% for interest in interests %}
+                                            <div class="col-md-4 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="{{ interest }}" id="interest-{{ loop.index }}" name="interests" 
+                                                    {% if prefill and prefill.selected_interests and interest in prefill.selected_interests %}checked{% endif %}>
+                                                    <label class="form-check-label" for="interest-{{ loop.index }}">
+                                                        {{ interest }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Ad Banner</h5>
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Choose upload method:</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="upload_type" id="file_upload" value="file" checked onchange="toggleUploadMethod()">
+                                        <label class="form-check-label" for="file_upload">
+                                            Upload File
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="upload_type" id="url_upload" value="url" onchange="toggleUploadMethod()">
+                                        <label class="form-check-label" for="url_upload">
+                                            Image URL
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div id="file_upload_section">
+                                    <label for="banner" class="form-label">Upload Image File</label>
+                                    <input class="form-control" type="file" id="banner" name="banner" accept="image/*">
+                                    <div class="form-text">Upload an image for your ad campaign</div>
+                                </div>
+                                
+                                <div id="url_upload_section" style="display: none;">
+                                    <label for="banner_url" class="form-label">Image URL</label>
+                                    <input class="form-control" type="url" id="banner_url" name="banner_url" placeholder="https://example.com/image.jpg">
+                                    <div class="form-text">Enter the URL of your ad campaign image</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div id="preview-container" class="mt-3 d-none">
+                            <h5>Preview</h5>
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <img id="image-preview" src="" alt="Ad Preview" class="img-fluid mb-3" style="max-height: 300px;">
+                                    <div class="campaign-details">
+                                        <div id="preview-name" class="h5 mb-2"></div>
+                                        <div id="preview-targeting" class="text-muted small"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Create Campaign</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function toggleUploadMethod() {
+    const fileSection = document.getElementById('file_upload_section');
+    const urlSection = document.getElementById('url_upload_section');
+    const fileUpload = document.getElementById('banner');
+    const urlUpload = document.getElementById('banner_url');
+    
+    if (document.getElementById('file_upload').checked) {
+        fileSection.style.display = 'block';
+        urlSection.style.display = 'none';
+        fileUpload.required = true;
+        urlUpload.required = false;
+        urlUpload.value = '';
+    } else {
+        fileSection.style.display = 'none';
+        urlSection.style.display = 'block';
+        fileUpload.required = false;
+        urlUpload.required = true;
+        fileUpload.value = '';
+    }
+}
+
+// Initialize the form state
+document.addEventListener('DOMContentLoaded', function() {
+    toggleUploadMethod();
+});
+
+// Form validation and preview
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const nameInput = document.getElementById('name');
+    const ageMinInput = document.querySelector('input[name="age_min"]');
+    const ageMaxInput = document.querySelector('input[name="age_max"]');
+    const locationSelect = document.getElementById('location');
+    const interestCheckboxes = document.querySelectorAll('input[name="interests"]');
+    const bannerInput = document.getElementById('banner');
+    const previewContainer = document.getElementById('preview-container');
+    const imagePreview = document.getElementById('image-preview');
+    const previewName = document.getElementById('preview-name');
+    const previewTargeting = document.getElementById('preview-targeting');
+    
+    // Ensure at least one interest is selected
+    form.addEventListener('submit', function(e) {
+        const checkedInterests = Array.from(interestCheckboxes).filter(cb => cb.checked);
+        if (checkedInterests.length === 0) {
+            alert('Please select at least one interest');
+            e.preventDefault();
+            return false;
+        }
+        return true;
+    });
+    
+    // Show image preview when file is selected
+    bannerInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.addEventListener('load', function() {
+                imagePreview.src = reader.result;
+                updatePreview();
+            });
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    // Update preview when form fields change
+    [nameInput, ageMinInput, ageMaxInput, locationSelect].forEach(el => {
+        el.addEventListener('input', updatePreview);
+    });
+    
+    interestCheckboxes.forEach(cb => {
+        cb.addEventListener('change', updatePreview);
+    });
+    
+    function updatePreview() {
+        // Only show preview if we have a name and image
+        if (nameInput.value && bannerInput.files.length > 0) {
+            previewContainer.classList.remove('d-none');
+            previewName.textContent = nameInput.value;
+            
+            // Get selected interests
+            const selectedInterests = Array.from(interestCheckboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value)
+                .join(', ');
+            
+            // Create targeting text
+            const ageRange = `Age: ${ageMinInput.value}-${ageMaxInput.value}`;
+            const location = locationSelect.value ? `Location: ${locationSelect.value}` : '';
+            const interests = selectedInterests ? `Interests: ${selectedInterests}` : '';
+            
+            const targetingParts = [ageRange, location, interests].filter(part => part);
+            previewTargeting.textContent = targetingParts.join(' | ');
+        }
+    }
+});
+
+// AI Campaign Suggestion functionality
+function getSuggestion() {
+    const businessType = document.getElementById('business-type').value;
+    const suggestionContainer = document.getElementById('suggestion-container');
+    const suggestionContent = document.getElementById('suggestion-content');
+    const suggestionBtn = document.getElementById('suggestion-btn');
+    
+    // Show loading state
+    suggestionContainer.style.display = 'block';
+    suggestionContent.innerHTML = '<div class="text-center"><div class="spinner-border text-primary" role="status"></div><p>Generating campaign ideas...</p></div>';
+    suggestionBtn.disabled = true;
+    
+    // API URL with business type parameter if provided
+    let apiUrl = '/api/campaign-suggestion';
+    if (businessType) {
+        apiUrl += `?business_type=${encodeURIComponent(businessType)}`;
+    }
+    
+    // Call API to get suggestion
+    fetch(apiUrl, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(data => {
+                throw new Error(data.message || data.error || 'Failed to get suggestion');
+            });
+        }
+        return response.json();
+    })
+    .then(suggestion => {
+        // Parse targeting string to extract information
+        const targetingStr = suggestion.targeting || '';
+        const ageMatch = targetingStr.match(/Age:\s*(\d+)-(\d+)/i);
+        const locationMatch = targetingStr.match(/Location:\s*\[?([^\],]+)(?:,|\]|$)/i);
+        const interestsMatch = targetingStr.match(/Interests:\s*\[?([^\]]+)(?:\]|$)/i);
+        
+        // Display suggestion with apply button
+        suggestionContent.innerHTML = `
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">${suggestion.title}</h5>
+                    <p class="text-muted">${suggestion.description}</p>
+                    <div class="mb-3">
+                        <h6>Recommended Targeting:</h6>
+                        <p>${suggestion.targeting}</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6>Suggested Ad Copy:</h6>
+                        <p class="bg-light p-3 border">${suggestion.adText}</p>
+                    </div>
+                    <button type="button" class="btn btn-success" 
+                        onclick="applySuggestion('${escapeJS(suggestion.title)}', 
+                            ${ageMatch ? ageMatch[1] : 25}, 
+                            ${ageMatch ? ageMatch[2] : 45}, 
+                            '${locationMatch ? escapeJS(locationMatch[1].trim()) : ''}',
+                            '${interestsMatch ? escapeJS(interestsMatch[1]) : ''}',
+                            '${escapeJS(suggestion.adText)}')">
+                        <i class="bi bi-check-circle"></i> Use This Idea
+                    </button>
+                </div>
+            </div>
+        `;
+    })
+    .catch(error => {
+        console.error('Error fetching campaign suggestion:', error);
+        suggestionContent.innerHTML = `
+            <div class="alert alert-danger">
+                <h5><i class="bi bi-exclamation-triangle-fill"></i> AI Suggestion Unavailable</h5>
+                <p>${error.message}</p>
+                <div class="mt-3">
+                    <p class="mb-0"><strong>Make sure:</strong></p>
+                    <ul class="mb-0">
+                        <li>You have set up the CEREBRAS_API_KEY environment variable</li>
+                        <li>Your API key is valid and has sufficient permissions</li>
+                        <li>The AI service is currently online</li>
+                    </ul>
+                </div>
+            </div>
+        `;
+    })
+    .finally(() => {
+        suggestionBtn.disabled = false;
+    });
+}
+
+// Helper function to escape special characters for JavaScript strings
+function escapeJS(str) {
+    return str.replace(/['\\]/g, '\\$&');
+}
+
+// Apply suggestion to form fields
+function applySuggestion(title, ageMin, ageMax, location, interests, adText) {
+    // Set campaign name
+    document.getElementById('name').value = title;
+    
+    // Set ad copy text
+    document.getElementById('ad_copy').value = adText;
+    
+    // Set age range
+    document.querySelector('input[name="age_min"]').value = ageMin;
+    document.querySelector('input[name="age_max"]').value = ageMax;
+    
+    // Set location if it exists in options
+    const locationSelect = document.getElementById('location');
+    
+    // Try to find a matching location
+    if (location) {
+        const cleanLocation = location.replace(/[\[\]]/g, '').trim();
+        // Try exact match first
+        let locationFound = false;
+        
+        for (let i = 0; i < locationSelect.options.length; i++) {
+            if (locationSelect.options[i].value === cleanLocation) {
+                locationSelect.selectedIndex = i;
+                locationFound = true;
+                break;
+            }
+        }
+        
+        // If no exact match, try case-insensitive match
+        if (!locationFound) {
+            const lowerCleanLocation = cleanLocation.toLowerCase();
+            for (let i = 0; i < locationSelect.options.length; i++) {
+                if (locationSelect.options[i].value.toLowerCase() === lowerCleanLocation) {
+                    locationSelect.selectedIndex = i;
+                    locationFound = true;
+                    break;
+                }
+            }
+        }
+        
+        // If still no match, try partial match
+        if (!locationFound) {
+            for (let i = 0; i < locationSelect.options.length; i++) {
+                if (locationSelect.options[i].value.toLowerCase().includes(lowerCleanLocation) ||
+                    lowerCleanLocation.includes(locationSelect.options[i].value.toLowerCase())) {
+                    locationSelect.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+    }
+    
+    // Set interests
+    const interestCheckboxes = document.querySelectorAll('input[name="interests"]');
+    // Clean up interests string - remove brackets and split by commas
+    const interestList = interests.replace(/[\[\]]/g, '').split(',').map(int => int.trim());
+    
+    // Uncheck all first
+    interestCheckboxes.forEach(cb => cb.checked = false);
+    
+    // Check exact matches first
+    interestCheckboxes.forEach(cb => {
+        if (interestList.includes(cb.value)) {
+            cb.checked = true;
+        }
+    });
+    
+    // If no exact matches, try case-insensitive matches
+    const checkedCount = Array.from(interestCheckboxes).filter(cb => cb.checked).length;
+    if (checkedCount === 0) {
+        const lowerInterestList = interestList.map(int => int.toLowerCase());
+        interestCheckboxes.forEach(cb => {
+            if (lowerInterestList.includes(cb.value.toLowerCase())) {
+                cb.checked = true;
+            }
+        });
+    }
+    
+    // Alert with success message
+    const confirmBox = document.createElement('div');
+    confirmBox.className = 'alert alert-success alert-dismissible fade show mt-3';
+    confirmBox.innerHTML = `
+        <i class="bi bi-check-circle-fill me-2"></i>
+        Campaign idea applied! You can now adjust any details and complete your campaign.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    document.getElementById('suggestion-container').appendChild(confirmBox);
+    
+    // Update preview if image is already selected
+    const updatePreviewFn = new Event('input');
+    document.getElementById('name').dispatchEvent(updatePreviewFn);
+    
+    // Scroll to the form fields
+    document.querySelector('label[for="name"]').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+{% endblock %} 
