@@ -1,5 +1,6 @@
 # Campaign Management System
 
+
 ## Overview
 A sophisticated campaign management system that leverages AI to provide intelligent campaign suggestions and management capabilities. The system integrates with MongoDB for data persistence and uses advanced AI services for campaign optimization.
 
@@ -8,6 +9,7 @@ A sophisticated campaign management system that leverages AI to provide intellig
 - **Robust Authentication**: Secure token-based authentication system
 - **Asynchronous Architecture**: Efficient handling of database operations and API calls
 - **MongoDB Integration**: Scalable data storage with proper async/await patterns
+
 
 ## Getting Started
 
@@ -39,6 +41,7 @@ CEREBRAS_API_KEY=your_api_key
 python app.py
 ```
 
+
 ## Project Structure
 ```
 Campaign/
@@ -54,6 +57,7 @@ Campaign/
 ├── templates/            # HTML templates
 └── requirements.txt     # Python dependencies
 ```
+
 ## Technical Architecture
 
 ### Architecture Diagram
@@ -97,35 +101,15 @@ graph TD
    - Thread pool execution for non-blocking operations
    - Intelligent campaign suggestion algorithm
 
-## API Endpoints
+## Technical Details
+- **Backend**: FastAPI with async support
+- **Database**: MongoDB with async operations
+- **Authentication**: Token-based with secure session management
+- **AI Integration**: Cerebras API for campaign suggestions
+  - Model: llama-4-scout-17b-16e-instruct
+  - Features: Text generation, creative content
+- **Frontend**: Jinja2 Templates with static assets, using HTML, CSS, and JavaScript
 
-### Authentication
-- `POST /token` - Login and get access token
-- `GET /logout` - Logout user
-- `POST /signup` - Register new user
-
-### Campaign Management
-- `GET /campaigns` - List user campaigns
-- `POST /create-campaign` - Create new campaign
-- `GET /edit-campaign/{id}` - Edit campaign
-- `GET /delete-campaign/{id}` - Delete campaign
-
-### AI Features
-- `GET /api/campaign-suggestion` - Get AI-powered campaign suggestions
-
-## AI Tools Used
-
-### 1. Cerebras API
-- Used for generating intelligent campaign suggestions
-- **Model**: llama-4-scout-17b-16e-instruct
-- **Features**: Text generation, creative content, context-aware suggestions
-- **Integration**: Uses the Cerebras Cloud SDK to access the API
-- **Usage**: Generates campaign titles, descriptions, ad copy and targeting suggestions based on business type
-
-### 2. MongoDB Atlas
-- Intelligent data clustering
-- Automated indexing
-- Performance optimization
 
 ## Best Practices Implemented
 - Proper async/await patterns
