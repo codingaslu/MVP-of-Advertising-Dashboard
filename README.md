@@ -1,5 +1,35 @@
 # Campaign Management System
 
+## Getting Started
+
+### 1. Create and Activate Virtual Environment
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment (Windows)
+venv\Scripts\activate
+
+# Activate virtual environment (macOS/Linux)
+source venv/bin/activate
+```
+
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Configure Environment Variables
+```bash
+MONGODB_URI=your_mongodb_uri
+CEREBRAS_API_KEY=your_api_key
+```
+
+### 4. Run the Application
+```bash
+python app.py
+```
+
 ## Overview
 A sophisticated campaign management system that leverages AI to provide intelligent campaign suggestions and management capabilities. The system integrates with MongoDB for data persistence and uses advanced AI services for campaign optimization.
 
@@ -24,7 +54,6 @@ Campaign/
 ├── templates/            # HTML templates
 └── requirements.txt     # Python dependencies
 ```
-
 ## Technical Architecture
 
 ### Architecture Diagram
@@ -68,55 +97,6 @@ graph TD
    - Thread pool execution for non-blocking operations
    - Intelligent campaign suggestion algorithm
 
-## AI Tools Used
-
-### 1. Cerebras API
-- Used for generating intelligent campaign suggestions
-- **Model**: llama-4-scout-17b-16e-instruct
-- **Features**: Text generation, creative content, context-aware suggestions
-- **Integration**: Uses the Cerebras Cloud SDK to access the API
-- **Usage**: Generates campaign titles, descriptions, ad copy and targeting suggestions based on business type
-
-### 2. MongoDB Atlas
-- Intelligent data clustering
-- Automated indexing
-- Performance optimization
-
-## How AI Accelerated Development
-
-### 1. Code Generation and Debugging
-- AI assisted in identifying and fixing async/await patterns
-- Automated generation of boilerplate code
-- Quick debugging of authentication flows
-
-### 2. Architecture Optimization
-- AI suggested optimal database schema
-- Helped identify potential performance bottlenecks
-- Provided best practices for API integration
-
-### 3. Development Speed
-- Reduced development time by ~60%
-- Automated repetitive coding tasks
-- Quick problem identification and resolution
-
-## Getting Started
-
-1. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-2. Configure environment variables:
-```bash
-MONGODB_URI=your_mongodb_uri
-CEREBRAS_API_KEY=your_api_key
-```
-
-3. Run the application:
-```bash
-python app.py
-```
-
 ## API Endpoints
 
 ### Authentication
@@ -132,6 +112,20 @@ python app.py
 
 ### AI Features
 - `GET /api/campaign-suggestion` - Get AI-powered campaign suggestions
+
+## AI Tools Used
+
+### 1. Cerebras API
+- Used for generating intelligent campaign suggestions
+- **Model**: llama-4-scout-17b-16e-instruct
+- **Features**: Text generation, creative content, context-aware suggestions
+- **Integration**: Uses the Cerebras Cloud SDK to access the API
+- **Usage**: Generates campaign titles, descriptions, ad copy and targeting suggestions based on business type
+
+### 2. MongoDB Atlas
+- Intelligent data clustering
+- Automated indexing
+- Performance optimization
 
 ## Best Practices Implemented
 - Proper async/await patterns
