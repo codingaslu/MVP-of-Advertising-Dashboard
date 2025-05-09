@@ -63,6 +63,38 @@
         border-radius: 4px;
         border: 2px solid #f8f9fa;
     }
+    .loader-container {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .loader {
+        border: 5px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 5px solid #3498db;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+    }
+
+    .loader-text {
+        color: white;
+        margin-top: 20px;
+        font-size: 18px;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
 </style>
 {% endblock %}
 
@@ -233,6 +265,13 @@
                 </form>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="loader-container" id="loaderContainer">
+    <div style="text-align: center;">
+        <div class="loader"></div>
+        <div class="loader-text">Creating your campaign...</div>
     </div>
 </div>
 {% endblock %}
@@ -526,5 +565,47 @@ function applySuggestion(title, ageMin, ageMax, location, interests, adText) {
     // Scroll to the form fields
     document.querySelector('label[for="name"]').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const loaderContainer = document.getElementById('loaderContainer');
+
+    form.addEventListener('submit', function(e) {
+        // Show loader
+        loaderContainer.style.display = 'flex';
+        
+        // Disable submit button to prevent double submission
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) {
+            submitButton.disabled = true;
+        }
+    });
+});
+
+// Handle radio button change for upload type
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('banner');
+    const urlInput = document.getElementById('banner_url');
+    const uploadType = document.getElementsByName('upload_type');
+
+    function toggleInputs() {
+        if (document.querySelector('input[name="upload_type"]:checked').value === 'file') {
+            fileInput.style.display = 'block';
+            urlInput.style.display = 'none';
+            urlInput.value = '';
+        } else {
+            fileInput.style.display = 'none';
+            urlInput.style.display = 'block';
+            fileInput.value = '';
+        }
+    }
+
+    uploadType.forEach(radio => {
+        radio.addEventListener('change', toggleInputs);
+    });
+
+    // Initial toggle
+    toggleInputs();
+});
 </script>
 {% endblock %} 
