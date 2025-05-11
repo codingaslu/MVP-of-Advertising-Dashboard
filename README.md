@@ -9,6 +9,8 @@ A sophisticated campaign management system that leverages AI to provide intellig
 - **Asynchronous Architecture**: Efficient handling of database operations and API calls
 - **MongoDB Integration**: Scalable data storage with proper async/await patterns
 
+🔗 Live Demo: https://mvp-of-advertising-dashboard.onrender.com
+
 ## Development Tools Used
 
 ### Claude (Anthropic's AI)
