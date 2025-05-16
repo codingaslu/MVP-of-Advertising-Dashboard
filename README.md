@@ -6,8 +6,19 @@ A sophisticated campaign management system that leverages AI to provide intellig
 ## Key Features
 - **AI-Powered Campaign Suggestions**: Integration with Cerebras API for intelligent campaign recommendations
 - **Robust Authentication**: Secure token-based authentication system
+- **Ad Banner Upload**: Supports both URL and file upload options
+- **Audience Targeting**: Age range, locations, and interests selection
+- **Campaign Management**: Create and view campaigns with all details
+- **AI-Powered Features**: Ad copy suggestions generated dynamically
+- **Simulated Analytics**: Fake impressions, CTR, and spend data
+- **Responsive Design**: Works on desktop and mobile devices
+- **Campaign Status Control**: Activate, deactivate, and delete campaigns
+- **Image Management**: GridFS storage for banner images
+- **User Registration & Login**: Complete authentication flow
+- **Campaign Editing**: Modify existing campaigns
 - **Asynchronous Architecture**: Efficient handling of database operations and API calls
 - **MongoDB Integration**: Scalable data storage with proper async/await patterns
+
 
 🔗 Live Demo: https://mvp-of-advertising-dashboard.onrender.com
 
