@@ -141,7 +141,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Configure Environment Variables (Extract key.zip using the given password in the email)
+### 3. Configure Environment Variables (Extract key.zip containing the .env file using the given password in the email)
 ```bash
 MONGODB_URI=your_mongodb_uri
 CEREBRAS_API_KEY=your_api_key
