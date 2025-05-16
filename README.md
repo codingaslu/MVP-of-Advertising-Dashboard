@@ -3,11 +3,42 @@
 ## Overview
 A sophisticated campaign management system that leverages AI to provide intelligent campaign suggestions and management capabilities. The system integrates with MongoDB for data persistence and uses advanced AI services for campaign optimization.
 
+## Screenshots
+<div align="center">
+  <img src="static/images/screenshots/1.png" alt="Dashboard Overview" width="800"/>
+  <p><em>Dashboard Overview</em></p>
+  
+  <img src="static/images/screenshots/2.png" alt="Campaign Creation" width="800"/>
+  <p><em>Campaign Creation Interface</em></p>
+  
+  <img src="static/images/screenshots/3.png" alt="Campaign Management" width="800"/>
+  <p><em>Campaign Management Dashboard</em></p>
+  
+  <img src="static/images/screenshots/4.png" alt="Audience Targeting" width="800"/>
+  <p><em>Audience Targeting Configuration</em></p>
+  
+  <img src="static/images/screenshots/5.png" alt="Ad Content Management" width="800"/>
+  <p><em>Ad Content Management</em></p>
+  
+  <img src="static/images/screenshots/6.png" alt="Analytics Dashboard" width="800"/>
+  <p><em>Analytics Dashboard</em></p>
+  
+  <img src="static/images/screenshots/7.png" alt="User Authentication" width="800"/>
+  <p><em>User Authentication</em></p>
+</div>
+
 ## Key Features
-- **AI-Powered Campaign Suggestions**: Integration with Cerebras API for intelligent campaign recommendations
-- **Robust Authentication**: Secure token-based authentication system
-- **Asynchronous Architecture**: Efficient handling of database operations and API calls
-- **MongoDB Integration**: Scalable data storage with proper async/await patterns
+- **User Authentication**: Secure token-based authentication with complete registration & login flow
+- **Campaign Management**: Create, edit, activate, deactivate, and delete campaigns
+- **Ad Content Management**: Banner upload via URL or file with GridFS storage
+- **Audience Targeting**: Specify age ranges, locations, and interests
+- **AI-Powered Capabilities**: Intelligent campaign suggestions and dynamic ad copy generation
+- **Analytics Dashboard**: Simulated impressions, CTR, and spend data
+- **Responsive Design**: Optimized for both desktop and mobile devices
+- **Technical Foundation**: Asynchronous architecture with MongoDB integration
+
+
+🔗 Live Demo: https://mvp-of-advertising-dashboard.onrender.com
 
 ## Development Tools Used
 
