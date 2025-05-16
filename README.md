@@ -4,15 +4,21 @@
 A sophisticated campaign management system that leverages AI to provide intelligent campaign suggestions and management capabilities. The system integrates with MongoDB for data persistence and uses advanced AI services for campaign optimization.
 
 ## Screenshots
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-  <img src="static/images/screenshots/1.png" alt="Dashboard Overview" style="width: 300px; height: auto;"/>
-  <img src="static/images/screenshots/2.png" alt="Campaign Creation" style="width: 300px; height: auto;"/>
-  <img src="static/images/screenshots/3.png" alt="Campaign Management" style="width: 300px; height: auto;"/>
-  <img src="static/images/screenshots/4.png" alt="Audience Targeting" style="width: 300px; height: auto;"/>
-  <img src="static/images/screenshots/5.png" alt="Ad Content Management" style="width: 300px; height: auto;"/>
-  <img src="static/images/screenshots/6.png" alt="Analytics Dashboard" style="width: 300px; height: auto;"/>
-  <img src="static/images/screenshots/7.png" alt="User Authentication" style="width: 300px; height: auto;"/>
+<div align="center">
+  <img src="static/images/screenshots/1.png" alt="Dashboard Overview" width="800" style="display: block; margin: 0 auto;"/>
 </div>
+
+<details>
+<summary>View More Screenshots</summary>
+<div align="center">
+  <img src="static/images/screenshots/2.png" alt="Campaign Creation" width="800" style="display: block; margin: 0 auto;"/>
+  <img src="static/images/screenshots/3.png" alt="Campaign Management" width="800" style="display: block; margin: 0 auto;"/>
+  <img src="static/images/screenshots/4.png" alt="Audience Targeting" width="800" style="display: block; margin: 0 auto;"/>
+  <img src="static/images/screenshots/5.png" alt="Ad Content Management" width="800" style="display: block; margin: 0 auto;"/>
+  <img src="static/images/screenshots/6.png" alt="Analytics Dashboard" width="800" style="display: block; margin: 0 auto;"/>
+  <img src="static/images/screenshots/7.png" alt="User Authentication" width="800" style="display: block; margin: 0 auto;"/>
+</div>
+</details>
 
 ## Key Features
 - **User Authentication**: Secure token-based authentication with complete registration & login flow
