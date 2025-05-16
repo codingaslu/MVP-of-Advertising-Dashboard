@@ -6,25 +6,12 @@ A sophisticated campaign management system that leverages AI to provide intellig
 ## Screenshots
 <div align="center">
   <img src="static/images/screenshots/1.png" alt="Dashboard Overview" width="800"/>
-  <p><em>Dashboard Overview</em></p>
-  
   <img src="static/images/screenshots/2.png" alt="Campaign Creation" width="800"/>
-  <p><em>Campaign Creation Interface</em></p>
-  
   <img src="static/images/screenshots/3.png" alt="Campaign Management" width="800"/>
-  <p><em>Campaign Management Dashboard</em></p>
-  
   <img src="static/images/screenshots/4.png" alt="Audience Targeting" width="800"/>
-  <p><em>Audience Targeting Configuration</em></p>
-  
   <img src="static/images/screenshots/5.png" alt="Ad Content Management" width="800"/>
-  <p><em>Ad Content Management</em></p>
-  
   <img src="static/images/screenshots/6.png" alt="Analytics Dashboard" width="800"/>
-  <p><em>Analytics Dashboard</em></p>
-  
   <img src="static/images/screenshots/7.png" alt="User Authentication" width="800"/>
-  <p><em>User Authentication</em></p>
 </div>
 
 ## Key Features
@@ -157,12 +144,3 @@ CEREBRAS_API_KEY=your_api_key
 ```bash
 python app.py
 ```
-
-## Best Practices Implemented
-- Proper async/await patterns
-- Secure token handling
-- Efficient API integration
-- Scalable database operations
-- Modular code organization
-- Clean separation of concerns
-
