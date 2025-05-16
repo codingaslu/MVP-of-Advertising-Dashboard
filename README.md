@@ -5,20 +5,31 @@ A sophisticated campaign management system that leverages AI to provide intellig
 
 ## Screenshots
 <div align="center">
-  <img src="static/images/screenshots/1.png" alt="Dashboard Overview" width="800" style="display: block; margin: 0 auto;"/>
+  <img id="slideshow" src="static/images/screenshots/1.png" alt="Dashboard Overview" width="800" style="display: block; margin: 0 auto;"/>
+  <div style="margin-top: 10px;">
+    <button onclick="prevImage()" style="padding: 5px 15px; margin: 0 5px;">Previous</button>
+    <button onclick="nextImage()" style="padding: 5px 15px; margin: 0 5px;">Next</button>
+  </div>
 </div>
 
-<details>
-<summary>View More Screenshots</summary>
-<div align="center">
-  <img src="static/images/screenshots/2.png" alt="Campaign Creation" width="800" style="display: block; margin: 0 auto;"/>
-  <img src="static/images/screenshots/3.png" alt="Campaign Management" width="800" style="display: block; margin: 0 auto;"/>
-  <img src="static/images/screenshots/4.png" alt="Audience Targeting" width="800" style="display: block; margin: 0 auto;"/>
-  <img src="static/images/screenshots/5.png" alt="Ad Content Management" width="800" style="display: block; margin: 0 auto;"/>
-  <img src="static/images/screenshots/6.png" alt="Analytics Dashboard" width="800" style="display: block; margin: 0 auto;"/>
-  <img src="static/images/screenshots/7.png" alt="User Authentication" width="800" style="display: block; margin: 0 auto;"/>
-</div>
-</details>
+<script>
+let currentImage = 1;
+const totalImages = 7;
+
+function updateImage() {
+  document.getElementById('slideshow').src = `static/images/screenshots/${currentImage}.png`;
+}
+
+function nextImage() {
+  currentImage = currentImage === totalImages ? 1 : currentImage + 1;
+  updateImage();
+}
+
+function prevImage() {
+  currentImage = currentImage === 1 ? totalImages : currentImage - 1;
+  updateImage();
+}
+</script>
 
 ## Key Features
 - **User Authentication**: Secure token-based authentication with complete registration & login flow
