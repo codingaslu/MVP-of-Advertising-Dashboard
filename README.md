@@ -5,13 +5,21 @@ A sophisticated campaign management system that leverages AI to provide intellig
 
 ## Screenshots
 <div align="center">
-  <img src="static/images/screenshots/1.png" alt="Dashboard Overview" width="800"/>
-  <img src="static/images/screenshots/2.png" alt="Campaign Creation" width="800"/>
-  <img src="static/images/screenshots/3.png" alt="Campaign Management" width="800"/>
-  <img src="static/images/screenshots/4.png" alt="Audience Targeting" width="800"/>
-  <img src="static/images/screenshots/5.png" alt="Ad Content Management" width="800"/>
-  <img src="static/images/screenshots/6.png" alt="Analytics Dashboard" width="800"/>
-  <img src="static/images/screenshots/7.png" alt="User Authentication" width="800"/>
+<table>
+<tr>
+<td><img src="static/images/screenshots/1.png" alt="Dashboard Overview" width="400"/></td>
+<td><img src="static/images/screenshots/2.png" alt="Campaign Creation" width="400"/></td>
+<td><img src="static/images/screenshots/3.png" alt="Campaign Management" width="400"/></td>
+</tr>
+<tr>
+<td><img src="static/images/screenshots/4.png" alt="Audience Targeting" width="400"/></td>
+<td><img src="static/images/screenshots/5.png" alt="Ad Content Management" width="400"/></td>
+<td><img src="static/images/screenshots/6.png" alt="Analytics Dashboard" width="400"/></td>
+</tr>
+<tr>
+<td colspan="3"><img src="static/images/screenshots/7.png" alt="User Authentication" width="400"/></td>
+</tr>
+</table>
 </div>
 
 ## Key Features
