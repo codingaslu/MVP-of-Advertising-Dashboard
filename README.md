@@ -17,6 +17,7 @@ A sophisticated campaign management system that leverages AI to provide intellig
   <img src="static/images/screenshots/5.png" alt="Ad Content Management" width="800" style="display: block; margin: 0 auto;"/>
   <img src="static/images/screenshots/6.png" alt="Analytics Dashboard" width="800" style="display: block; margin: 0 auto;"/>
   <img src="static/images/screenshots/7.png" alt="User Authentication" width="800" style="display: block; margin: 0 auto;"/>
+  <img src="static/images/screenshots/8.png" alt="User Authentication" width="800" style="display: block; margin: 0 auto;"/>
 </div>
 </details>
 
@@ -150,3 +151,14 @@ CEREBRAS_API_KEY=your_api_key
 ```bash
 python app.py
 ```
+## Best Practices
+- **Code Organization**: Modular structure with separate routes and services
+- **Security**: Secure token-based authentication and password hashing
+- **Performance**: Asynchronous operations for database and API calls
+- **Error Handling**: Comprehensive error handling and validation
+- **Database**: Proper MongoDB integration with indexes
+- **API Design**: RESTful endpoints with proper status codes
+- **Frontend**: Responsive design with modern UI/UX
+
+## License
+This project is licensed under the MIT License
