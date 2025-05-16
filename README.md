@@ -161,4 +161,4 @@ python app.py
 - **Frontend**: Responsive design with modern UI/UX
 
 ## License
-This project is licensed under the MIT License
+This project is licensed under the MIT License.
