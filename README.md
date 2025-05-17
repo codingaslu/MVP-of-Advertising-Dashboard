@@ -1,7 +1,7 @@
-# Campaign Management System
+# Advertising Dashboard (MVP)
 
 ## Overview
-A sophisticated campaign management system that leverages AI to provide intelligent campaign suggestions and management capabilities. The system integrates with MongoDB for data persistence and uses advanced AI services for campaign optimization.
+A sophisticated Advertising Dashboard that leverages AI to provide intelligent campaign suggestions and management capabilities. The system integrates with MongoDB for data persistence and uses advanced AI services for campaign optimization.
 
 ## Screenshots
 <div align="center">
